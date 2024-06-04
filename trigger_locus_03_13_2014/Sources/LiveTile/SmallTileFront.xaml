@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="trigger_locus_03_13_2014.Sources.LiveTile.SmallTileFront"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="159" d:DesignWidth="159">
+
+    <Canvas x:Name="LayoutRoot">
+        <Grid>
+            <Image Width="159" Height="159" x:Name="frontImage" Stretch="None" />
+            <TextBlock x:Name="temperatureRange" 
+                   FontFamily="Segoe WP SemiBold" 
+                   FontSize="12" Visibility="Collapsed"
+                   Foreground="Black"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top" />
+            <TextBlock x:Name="cityName" 
+                   FontFamily="Segoe WP SemiBold" 
+                   FontSize="{StaticResource PhoneFontSizeSmall}" 
+                   Foreground="Black"
+                   Margin="0,0,16,16"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center" />
+            <TextBlock x:Name="temperature" 
+                   FontFamily="Segoe WP SemiBold"
+                   FontSize="60" 
+                   Foreground="White" 
+                   Margin="0,0,12,12"
+                   HorizontalAlignment="Right" 
+                   VerticalAlignment="Bottom" />
+            <TextBlock x:Name="scale" 
+                   FontSize="12"
+                   FontFamily="Segoe WP Bold"
+                   Foreground="White"
+                   Margin="0,0,12,16" Visibility="Collapsed"
+                   HorizontalAlignment="Right" 
+                   VerticalAlignment="Bottom" />
+        </Grid>
+    </Canvas>
+</UserControl>

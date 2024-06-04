@@ -1,0 +1,52 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    x:Class="trigger_locus_03_13_2014.View.Calendar"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    xmlns:cal="clr-namespace:trigger_locus_03_13_2014.View"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity="0.5">
+
+    <UserControl.Resources>
+        <cal:AppointmentSources  x:Key="CalendarAppointments"/>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/Images/main_background.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitleBar-->
+        <StackPanel x:Name="TitleBar" Orientation="Horizontal" Grid.Row="0" Margin="5,0">
+            <Image Source="/Assets/Images/logo_small_solid.png" Height="20"/>
+            <TextBlock Text="Trigger Locus" FontSize="20" FontWeight="Light"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <telerikInput:RadCalendar HorizontalAlignment="Left"
+                                      SelectedValueChanged="mainCalendar_SelectedValueChanged"
+                                      x:Name="mainCalendar"
+                                      MonthInfoDisplayMode="Large"
+                                      AppointmentSource="{StaticResource CalendarAppointments}"
+                                      WeekNumbersVisibility="Visible"
+                                      VerticalAlignment="Top" Width="456">
+
+            </telerikInput:RadCalendar>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

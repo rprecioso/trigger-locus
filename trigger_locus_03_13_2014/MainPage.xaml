@@ -1,0 +1,112 @@
+﻿<phone:PhoneApplicationPage 
+    ManipulationStarted="PhoneApplicationPage_ManipulationStarted" 
+    ManipulationDelta="PhoneApplicationPage_ManipulationDelta"
+    ManipulationCompleted="PhoneApplicationPage_ManipulationCompleted"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Notification="clr-namespace:Syncfusion.WP.Controls.Notification;assembly=Syncfusion.SfHubTile.WP8"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    x:Class="trigger_locus_03_13_2014.MainPage"
+    mc:Ignorable="d"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity=".5">
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="hubTaskListTemplate">
+            <Notification:SfHubTile x:Name="taskHubs"
+        		Height="150"
+        		Tap="task_Tap"
+        		Tag="{Binding Task_id}"
+        		Width="{Binding TileWidth}"
+        		Margin="1"
+        		Foreground="Black"
+        		Background="{StaticResource PhoneInverseInactiveBrush}"
+        		BorderBrush="Transparent" BorderThickness="2" Opacity="0.7">
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu  x:Name="conmen">
+                        <toolkit:MenuItem Header="Resize" Tag="{Binding Task_id}" Tap="resizeTile"/>
+                        <toolkit:MenuItem Header="Read" Tag="{Binding Task_id}" Tap="readTask"/>
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Background="#FF191717" Width="{Binding TileWidth}">
+                            <TextBlock  Text="{Binding Title}" TextWrapping="NoWrap" TextAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="#DEDCB9B9" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Description}"  Width="{Binding TileWidth}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Date:"/>
+                        <TextBlock Text="{Binding Date_task, StringFormat=MMM dd\, yyyy}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Notification:SfHubTile>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+    <phone:PhoneApplicationPage.FontFamily>
+        <StaticResource ResourceKey="PhoneFontFamilyNormal"/>
+    </phone:PhoneApplicationPage.FontFamily>
+    <phone:PhoneApplicationPage.FontSize>
+        <StaticResource ResourceKey="PhoneFontSizeNormal"/>
+    </phone:PhoneApplicationPage.FontSize>
+    <phone:PhoneApplicationPage.Foreground>
+        <StaticResource ResourceKey="PhoneForegroundBrush"/>
+    </phone:PhoneApplicationPage.Foreground>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/Images/main_background.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitleBar-->
+        <StackPanel x:Name="TitleBar" Orientation="Horizontal" Grid.Row="0" Margin="5,0">
+            <Image Source="/Assets/Images/logo_small_solid.png" Height="20"/>
+            <TextBlock Text="Trigger Locus" FontSize="20" FontWeight="Light"/>
+        </StackPanel>
+
+        <!--MainHeader-->
+        <StackPanel x:Name="MainHeader" Orientation="Horizontal" Tap="dateHeader_Tap" Grid.Row="1" Margin="10,0" HorizontalAlignment="Right">
+            <TextBlock Text="{Binding dd}" x:Name="sideHeader" FontSize="75" FontWeight="Black" Margin="0,0,5,0" VerticalAlignment="Bottom"/>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                <TextBlock Text="{Binding ddd}" x:Name="topHeader" FontSize="30" FontWeight="Normal"/>
+                <TextBlock Text="{Binding MMM}" x:Name="botHeader" FontSize="25"  Margin="0,-12,0,0" FontWeight="Black"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="2" Margin="0">
+            <telerikPrimitives:RadDataBoundListBox 
+            x:Name="mainListbox"
+            HorizontalAlignment="Left"
+            Margin="10,0,0,0" 
+            ItemTemplate="{StaticResource hubTaskListTemplate}" ItemsSource="{Binding taskList}"
+            Grid.Row="2" VerticalAlignment="Top">
+                <telerikPrimitives:RadDataBoundListBox.EmptyContent>
+                    <StackPanel Orientation="Vertical"  HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="No triggers to display, hit the '+' button below to add one."
+                           TextAlignment="Center" Width="200"
+                           TextWrapping="Wrap"/>
+                        <Image Source="/Assets/Images/arrow_down.png" Margin="0,20" Height="200"/>
+                    </StackPanel>
+                </telerikPrimitives:RadDataBoundListBox.EmptyContent>
+                <telerikPrimitives:RadDataBoundListBox.VirtualizationStrategyDefinition>
+                    <telerikPrimitives:WrapVirtualizationStrategyDefinition Orientation="Horizontal"/>
+                </telerikPrimitives:RadDataBoundListBox.VirtualizationStrategyDefinition>
+            </telerikPrimitives:RadDataBoundListBox>
+        </Grid>
+
+    </Grid>
+
+</phone:PhoneApplicationPage>
